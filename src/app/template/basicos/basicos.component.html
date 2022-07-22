@@ -1,0 +1,120 @@
+<h2>Template Básicos</h2>
+<hr>
+
+
+<div class="row">
+    <div class="col">
+
+        <!-- Se asigna una referencia al formulario y va a ser 
+            de tipo ngForm el cual se envía a ngSubmit por medio 
+            de una función o método
+        -->
+        <form 
+        (ngSubmit)="guardar()" 
+        #miFormulario="ngForm">
+            
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+                    <!-- se grega el ngModel y el name en la etiqueta 
+                    con esto ya tengo acceso al valor de cada 
+                etiqueta input de mi formulario
+            
+                LOS NAME deben de ser unicos en nombre-->
+                    <input type="text"
+                            name="producto"
+                            [ngModel]="initForm.producto"
+                            class="form-control"
+                            placeholder="Nombre del producto"
+                            required
+                            minlength="3">
+
+                    <span 
+                    class="form-text text-danger"
+                    *ngIf='nombreValido()'>
+                    Debe de ser de 3 letras
+                    </span>
+                </div>
+            </div>
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                            name="precio"
+                            [ngModel]="initForm.precio"
+                            class="form-control"
+                            placeholder="Precio del producto"
+                            required
+                            >
+
+                            <span 
+                            class="form-text text-danger"
+                            *ngIf='precioValido()'>
+                            El precio debe ser 0 o mayor
+                            </span>
+                </div>
+            </div>
+
+             <!-- Existencias de producto -->
+             <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                            name="existencia"
+                            [ngModel]="initForm.existencias"
+                            class="form-control"
+                            placeholder="Existencia del producto">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <!-- [disabled]="miFormulario.invalid"
+                    Otra forma de validar el envio del formulario -->
+                    <button type="submit"
+                            [disabled]="miFormulario.invalid"
+                            class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col">
+
+        <span>Valid</span>
+        <pre>
+            <!-- Como ya tengo una referencia a mi formulario puedo 
+            acceder a los valores del mismo -->
+            {{miFormulario.valid}}
+        </pre>
+
+        <!-- Significa que  no se han cambiado ninguno de los valores
+        con el cual el formulario venia por defecto a mostrarse al usuario-->
+        <span>Pristine</span>
+        <pre>
+            {{miFormulario.pristine | json}}
+        </pre>
+
+        <!-- Significa que el usuario a tocado el formulario -->
+        <span>Touched</span>
+        <pre>
+            {{miFormulario.touched | json}}
+        </pre>
+
+        <span>Value</span>
+        <pre>
+            {{miFormulario.value | json}}
+        </pre>
+
+    </div>
+</div>
