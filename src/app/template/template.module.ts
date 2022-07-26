@@ -17,7 +17,7 @@ import { TemplateRoutingModule } from "./template-routing.module";
     imports:[
         TemplateRoutingModule,
         CommonModule,
-        //Para trabajar con formularios debemos de importar este modulo
+        //Para trabajar con template form debemos de importar este modulo
         FormsModule
     ],
     exports:[]

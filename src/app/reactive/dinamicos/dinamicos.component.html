@@ -1,1 +1,100 @@
-<p>dinamicos works!</p>
+<h2>Dynamic Reactive Template: <small>Dinámicos</small></h2>
+
+<hr>
+
+<form autocomplete="off" (ngSubmit)="guardar()" [formGroup]="miFormulario">
+
+    <!-- Nombre -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <!-- se usa el formControlName para tener control de la entrada del formulario -->
+            <input 
+                    class="form-control"
+                    placeholder="Nombre de la persona"
+                    formControlName="nombre"
+                    >
+                    <!-- Utilizo ngIf para mostrar el mensaje del span-->
+                    <span class="form-text text-danger"
+                            *ngIf="campoEsValido('nombre')">
+                        Este campo es obligatorio
+                    </span>
+        </div>
+    </div>
+
+    <!-- Agregar favorito-->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input class="form-control"
+                placeholder="Agregar favorito"
+                [formControl]="nuevoFavorito"
+                (keyup.enter)="agregarFavorito()">
+                
+
+                <button class="btn btn-outline-primary"
+                        type="button"
+                        (click)="agregarFavorito()"> 
+                        
+                    Agregar
+                </button>
+
+            </div>
+            
+                    
+        </div>
+    </div>
+
+    <!-- Lista de juegos favoritos -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <!-- Asigno el control del formulario a este div -->
+        <div class="col-sm-9" formArrayName="favoritos">
+
+            <!-- <div class="input-group mb-1"
+            *ngFor="let favorito of miFormulario.controls['favoritos'].value; let i = index"
+            > -->
+            <div class="input-group mb-1"
+            *ngFor="let favorito of favoritosArr.value; let i = index"
+            >
+                <input class="form-control mb-1"
+                    [formControlName]="i">
+                
+                <button class="btn btn-outline-danger"
+                type="button"
+                (click)="borrar(i)"
+                >
+                    Eliminar
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        
+        <div class="col-sm-12">
+            <!-- Agrego el buton como submit -->
+             <button type="submit"                   
+                    class="btn btn-primary float-end"
+                    (clic)="guardar()"> 
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
+
+<span>Valid</span>
+<pre>{{miFormulario.valid}}</pre>
+
+<br>
+
+<span>Value</span>
+<pre>{{miFormulario.value | json}}</pre>
+
+<br>
+
+<span>Agregar Juego</span>
+<pre>{{nuevoFavorito.valid}}</pre>
+
