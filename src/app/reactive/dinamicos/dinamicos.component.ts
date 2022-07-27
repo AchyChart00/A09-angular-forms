@@ -38,7 +38,9 @@ export class DinamicosComponent{
       return;
     }
 
-    this.favoritosArr.push(this.fb.control(this.nuevoFavorito.value, Validators.required));
+    this.favoritosArr.push(
+      this.fb.control(this.nuevoFavorito.value, Validators.required)
+      );
 
         //Alternativa
     //this.favoritosArr.push(new FormControl(this.nuevoFavorito.value, Validators.required));

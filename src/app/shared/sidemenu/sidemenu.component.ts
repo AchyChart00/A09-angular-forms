@@ -49,6 +49,17 @@ export class SideMenuComponent{
             texto:"Switches",
             ruta:"./reactive/switches"
         }
+    ];
+
+    auth: MenuItem[]=[
+        {
+            texto:"Registro",
+            ruta:"./auth/registro"
+        },
+        {
+            texto:"Login",
+            ruta:"./auth/login"
+        },
     ]
 
 }
